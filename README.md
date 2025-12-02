@@ -1,2 +1,2 @@
-# unmuted-now
-Technical assessment for the role of an AI Engineering Intern at Unmute.
+# muted
+A smart PII redactor built for anonymizing unstructured string data.
