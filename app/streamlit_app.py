@@ -1,36 +1,43 @@
-import streamlit as st
-import re
+import streamlit as lit
 
-# === Define your regex patterns ===
-EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
-PHONE_REGEX = re.compile(r'(\+?\d[\d\s\-]{7,}\d)')
+lit.set_page_config(
+    page_title="About Muted",   # This name appears in browser tab + sidebar
+    page_icon="🤫",
+    layout="wide"
+)
 
-# === Deterministic cleaning function ===
-def deterministic_clean(text: str) -> str:
-    """Applies pattern-based deterministic PII scrubbing."""
-    text = EMAIL_REGEX.sub("<EMAIL_REDACTED>", text)
-    text = PHONE_REGEX.sub("<PHONE_REDACTED>", text)
-    return text
+from PIL import Image
+import io
+import base64
 
-# === UI ===
-st.markdown("<h1 style='text-align: center;'>Welcome to Muted! 🤫</h1>", unsafe_allow_html=True)
+img = Image.open("assets/logo.png")
+buffered = io.BytesIO()
+img.save(buffered, format="PNG")
+img_str = base64.b64encode(buffered.getvalue()).decode()
 
-text = '''
-Hello there! Muted is a tool that was developed to quickly and effectively remove PII from unstructured data. 
-It was developed by [venn](https://github.com/vennby), under guidelines received from [mik](https://github.com/Mik1337), for [Unmute](https://unmute.now/)!
+lit.markdown(f"""
+<div style="text-align: center;">
+    <img src="data:image/png;base64,{img_str}" width="200">
+</div>
+""", unsafe_allow_html=True)
+
+lit.markdown("<h1 style='text-align: center;'>Welcome to Muted! 🤫</h1>", unsafe_allow_html=True)
+
+display_text = '''
+Hello there! Muted is a tool that was developed to quickly and effectively remove PII from unstructured data. It was developed by [venn](https://github.com/vennby), under guidelines received from [mik](https://github.com/Mik1337), for [Unmute](https://unmute.now/)!
+
+### Why does Unmute used Muted?
+Most workplace harassment in India goes unreported, and Unmute addresses this by collecting **anonymous**, self-reported experiences and analyzing them to uncover patterns across roles, sectors, and identities to identify gaps in the ecosystem.
+
+One of Unmute's core values is compassion towards the victims, due to which all the data that is collected and used for analysis has to be scrubbed clean of Personally Identifiable Information (PII).
+
+### How does Muted work?
+Muted takes a layered approach to redacting PII from user data.
+
+- Layer 1: Deterministic Cleaning
+    - Using Regex
+- Layer 2: Contextual Cleaning
+    - Using LLMs
 '''
 
-st.markdown(text, unsafe_allow_html=True)
-st.subheader("Test it out here~")
-
-# Functional text area
-user_input = st.text_area("Enter text with PII to be cleaned:", height=200, placeholder="Type your text here...")
-
-# Clean button
-if st.button("Clean Text"):
-    if user_input.strip() == "":
-        st.warning("Please enter some text first!")
-    else:
-        cleaned_text = deterministic_clean(user_input)
-        st.success("Text cleaned successfully!")
-        st.text_area("Cleaned Text:", value=cleaned_text, height=200)
+lit.markdown(display_text, unsafe_allow_html=True)
