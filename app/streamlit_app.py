@@ -10,7 +10,7 @@ from PIL import Image
 import io
 import base64
 
-img = Image.open("assets/logo.png")
+img = Image.open("https://github.com/vennby/muted/blob/main/app/assets/logo.png")
 buffered = io.BytesIO()
 img.save(buffered, format="PNG")
 img_str = base64.b64encode(buffered.getvalue()).decode()
