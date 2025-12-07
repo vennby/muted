@@ -1,13 +1,14 @@
-#!/usr/bin/env python3
 """
 Muted CLI — A simple command-line tool to redact PII (emails, phones, names, locations).
 
 Usage:
-    python muted_cli.py input.json output.json
+    python muted.py input.json output.json
 
 The input JSON must be a list of objects:
 [
-  { "id": 1, "text": "Some text containing PII" },
+  { "id": 1,
+    "text": "Some text containing PII"
+},
   ...
 ]
 
@@ -26,9 +27,9 @@ from huggingface_hub import InferenceClient
 # ----------------------------------------------------
 load_dotenv()
 
-HF_API_KEY = os.getenv("HF_API_TOKEN")
+HF_API_KEY = os.getenv("HF_API_KEY")
 if HF_API_KEY is None:
-    raise ValueError("Please set HF_API_TOKEN in your environment variables!")
+    raise ValueError("Please set HF_API_KEY in your environment variables!")
 
 client = InferenceClient(provider="auto", api_key=HF_API_KEY)
 

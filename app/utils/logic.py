@@ -6,9 +6,9 @@ from huggingface_hub import InferenceClient
 
 load_dotenv()
 
-HF_API_KEY = os.getenv("HF_API_TOKEN")
+HF_API_KEY = os.getenv("HF_API_KEY")
 if HF_API_KEY is None:
-    raise ValueError("Please set HF_API_TOKEN in your environment variables!")
+    raise ValueError("Please set HF_API_KEY in your environment variables!")
 
 client = InferenceClient(provider="auto", api_key=HF_API_KEY)
 
