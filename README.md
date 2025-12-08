@@ -37,9 +37,9 @@ python muted.py data.json clean.json
 ```
 
 ### GUI Version
-You can locally host the tool's GUI in the following steps. I used to `streamlit` to quickly build the app; this is only for a quick demonstration, and is not a **scalable tech stack for production environments**.
+You can locally host the tool's GUI in the following steps. I used `streamlit` to quickly build the app; this is only for the purpose of a quick demonstration, and is not a **scalable tech stack for production environments**.
 
-Ensure you already have your `requirements.txt` installed.
+Ensure that you already have your `requirements.txt` installed.
 
 ### 1. Navigate to the `app` folder in the repo using the terminal.
 
@@ -57,7 +57,7 @@ Or, you can simply try the tool here: [Muted! 🤫](https://muted-now.streamlit.
 
 ## Why did I pick `bert-base-NER`?
 
-`bert-base-NER` is a fine-tuned BERT model (trained by David S. Lim, Stanford) that is ready to use for Named Entity Recognition and achieves state-of-the-art performance for the NER task. It has been trained to recognize four types of entities: location (LOC), organizations (ORG), person (PER) and Miscellaneous (MISC).
+`bert-base-NER` is a fine-tuned BERT model (trained by David S. Lim, Stanford) that is ready to use for Named Entity Recognition and achieves state-of-the-art performance for NER tasks. It has been trained to recognize four types of entities: location (LOC), organizations (ORG), person (PER) and Miscellaneous (MISC).
 
 Specifically, this model is a bert-base-cased model that was fine-tuned on the English version of the standard **CoNLL-2003 Named Entity Recognition** dataset.
 
